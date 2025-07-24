@@ -57,9 +57,13 @@ const Register: React.FC = () => {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    ...data,
-                    skills: data.skills.split(',').map((s) => s.trim()),
+                      ...data,
+                      skills:
+                    data.role === 'engineer' && data.skills
+                      ? data.skills.split(',').map((s) => s.trim())
+                      : [],
                 }),
+
             });
 
             const result = await res.json();
